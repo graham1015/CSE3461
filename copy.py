@@ -1,17 +1,17 @@
 import sys, os
 
 #gets filename from command line arguements
-filename = sys.argv[1];
+name = sys.argv[1];
 dir = "recv/";
 
-#makes sub-directory if does not exist
+#make sub-directory if does not exist
 if not os.path.exists(dir):
     os.makedirs(dir);
 newFilename = dir+filename;
 
 #opens the original file
 try:
-    originalFile = open(filename,"rb");
+    original = open(filename,"rb");
 except IOError as e:
     print ('The file with this filename does not exist.');
 
@@ -27,3 +27,29 @@ while byte:
 #closes both files
 newFile.close();
 originalFile.close();
+
+
+
+
+import sys, os
+
+#get filename from arguments
+filename = sys.argv[1];
+
+
+#check if subdirectory exist, if not then create it
+if not os.path.exist("recv/"):
+    os.makedirs("recv/");
+
+#open file in binary
+try:
+	file = open(filename, rb);
+except IOError as e:
+	print ('File does not exist.');
+	
+#create new file
+newFile = open("recv/" + filename, "wb+");
+
+#iterate through and copy bytes
+section = file.read();
+while section
