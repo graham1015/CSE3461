@@ -52,4 +52,11 @@ newFile = open("recv/" + filename, "wb+");
 
 #iterate through and copy bytes
 section = file.read();
-while section
+while section:
+	newFile.write(section);
+	section = file.read();
+
+#close the files
+file.close();
+newFile.close();
+
