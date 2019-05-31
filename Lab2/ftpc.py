@@ -19,7 +19,7 @@ FILENAME = sys.argv[3];
 cliSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM);
 
 
-cliSocket.connect(HOST, PORT);
+cliSocket.connect((HOST, PORT));
 print ('Connected with ', Host, ' on port ', str(PORT));
 
 
