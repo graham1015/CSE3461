@@ -16,7 +16,7 @@ PORT = int(sys.argv[2]);
 FILENAME = sys.argv[3];
 
 
-cliSocket = socket.socket(socket.AF_INET, socket.SOCKSTREAM);
+cliSocket = socket(socket.AF_INET, socket.SOCKSTREAM);
 
 
 cliSocket.connect(HOST, PORT);
