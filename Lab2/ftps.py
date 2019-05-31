@@ -39,13 +39,13 @@ name = nameByte.decode(encoding="ascii").lstrip();
 print ('File name: ', name);
 
 #create subDirectory if does not exist
-folder = 'recv/';
+folder = "recv/";
 if not os.path.exists(folder):
-		os.mkdir(folder);
-fileName = folder + name;
+	os.mkdir(folder);
+fileName = folder+name;
 
 #Open file
-file = open(name, 'wb+');
+file = open(fileName, "wb+");
 
 #Read packets 1000 bytes at a time until the entire message is read. Then write to new file.
 bytesRead = 0;
