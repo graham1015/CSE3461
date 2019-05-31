@@ -20,7 +20,7 @@ PORT = int(sys.argv[1]);
 
 #Open the socket and confirm when open
 servSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM);
-servSocket.bind(HOST, PORT);
+servSocket.bind((HOST, PORT));
 print("Server is ready");
 
 #Connect with client
