@@ -35,17 +35,17 @@ print ('File size: ', size);
 
 #The following 20 bytes indicate file name
 nameByte= connSock.recv(20);
-name = nameByte.decode().lstrip();
+name = nameByte.decode(encoding="ascii").lstrip();
 print ('File name: ', name);
 
 #create subDirectory if does not exist
-folder = "recv/";
+folder = 'recv/';
 if not os.path.exists(folder):
 		os.mkdir(folder);
-fileName = folder+name;
+fileName = folder + name;
 
 #Open file
-file = open(fileName, 'wb+');
+file = open(name, 'wb+');
 
 #Read packets 1000 bytes at a time until the entire message is read. Then write to new file.
 bytesRead = 0;
