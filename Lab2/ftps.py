@@ -19,11 +19,12 @@ PORT = int(sys.argv[1]);
 
 
 #Open the socket and confirm when open
-servSocket = socket.socket(socket.AF_INET, socket.SOCKSTREAM);
+servSocket = socket(socket.AF_INET, socket.SOCKSTREAM);
 servSocket.bind(HOST, PORT);
 print("Server is ready");
 
 #Connect with client
+servSocket.listen(1);
 connSock, addr = servSocket.accept();
 print ('Connected with ', addr);
 
