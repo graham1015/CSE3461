@@ -38,8 +38,7 @@ size = os.path.getsize(FILENAME)
 sizeBytes = size.to_bytes(4, byteorder = 'big')
 correctedFILENAME = FILENAME.rjust(20)
 filenameBytes = correctedFILENAME.encode(encoding="ascii")
-correctedHost = HOST.ljust(4)
-hostBytes = correctedHost.encode(encoding="ascii")
+hostBytes = socket.inet_aton(HOST) 
 portBytes = PORT.to_bytes(2, byteorder='big') 
 
 #open file to read binary
