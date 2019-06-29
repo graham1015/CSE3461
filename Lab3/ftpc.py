@@ -38,7 +38,7 @@ size = os.path.getsize(FILENAME)
 sizeBytes = size.to_bytes(4, byteorder = 'big')
 correctedFILENAME = FILENAME.rjust(20)
 filenameBytes = correctedFILENAME.encode(encoding="ascii")
-correctedHost = HOST.rjust(4)
+correctedHost = HOST.ljust(4)
 hostBytes = correctedHost.encode(encoding="ascii")
 portBytes = PORT.to_bytes(2, byteorder='big') 
 

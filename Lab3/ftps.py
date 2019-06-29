@@ -35,11 +35,11 @@ print("Server is ready")
 
 while 1:
 	data, addr = servSocket.recvfrom(1000)
-	print ('Recieving from' , addr)
 	cliIP_encoded = data[0:4] 
 	cliPORT_encoded = data[4:6] 
 	if (int.from_bytes(data[6:7], byteorder='big') == 1): 
 		sizeByte = data[7:len(data)] 
+		print ('Recieving from' , addr)
 		size = int.from_bytes(sizeByte, byteorder='big')
 		print ('File size: ', size)
 	if (int.from_bytes(data[6:7], byteorder='big') == 2): 
