@@ -37,7 +37,7 @@ while True:
 	print ('Recieving from' , addr)
 	clientIP_encoded = data[0:4] 
 	clientPORT_encoded = data[4:6] 
-	switch (int.from_bytes(data[6:7], byteorder='big')): 
+	switch (int.from_bytes(data[6:7], byteorder='big')){ 
 		case 1:
 			sizeByte = data[7:len(data)] 
 			size = int.from_bytes(byte_size, byteorder='big')
@@ -55,7 +55,7 @@ while True:
 
 			if data == b"":
 				break
-
+	}
 file.close()
 cliSocket.close()
 print('File Successfully transfered. Connection closed.')
