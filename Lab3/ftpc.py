@@ -18,12 +18,12 @@ FILENAME = sys.argv[4]
 
 #Create connection
 try:
-	cliSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	cliSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 except (socket.error):
 	print('Failed to create socket.')
 	sys.exit();
 
-cliSocket.bind((socket.gethostname(),4567))
+cliSocket.bind((socket.gethostname(),9611))
 
 print ('Socket Created') 
 
