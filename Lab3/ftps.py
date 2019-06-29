@@ -24,7 +24,7 @@ except socket.error:
 print ('Socket Created') 
 
 try:
-	cliSocket.bind((HOST,PORT))
+	cliSocket.bind(('',PORT))
 	print ('Socket bind complete')
 except socket.error:
 	print('Failed to bind socket to host')
