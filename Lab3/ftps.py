@@ -17,10 +17,10 @@ HOST = socket.gethostname()
 PORT = int(sys.argv[1])
 
 try:
-	servSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	servSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 except socket.error:
 	print('Failed to create socket.')
-	sys.exit();
+	sys.exit()
 
 print ('Socket Created') 
 
