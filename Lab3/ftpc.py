@@ -23,7 +23,7 @@ except (socket.error):
 	print('Failed to create socket.')
 	sys.exit();
 
-cliSocket.bind((socket.gethostname(),9611))
+cliSocket.bind((socket.gethostname(),4567))
 
 print ('Socket Created') 
 
@@ -38,7 +38,8 @@ size = os.path.getsize(FILENAME)
 sizeBytes = size.to_bytes(4, byteorder = 'big')
 correctedFILENAME = FILENAME.rjust(20)
 filenameBytes = correctedFILENAME.encode(encoding="ascii")
-hostBytes = socket.inet_aton(HOST) 
+correctedHost = HOST.rjust(4)
+hostBytes = correctedHost.encode(encoding="ascii")
 portBytes = PORT.to_bytes(2, byteorder='big') 
 
 #open file to read binary
