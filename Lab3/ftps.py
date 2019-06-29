@@ -40,11 +40,11 @@ while 1:
 	cliPORT_encoded = data[4:6] 
 	if (int.from_bytes(data[6:7], byteorder='big') == 1): 
 		sizeByte = data[7:len(data)] 
-		size = int.from_bytes(byte_size, byteorder='big')
+		size = int.from_bytes(sizeByte, byteorder='big')
 		print ('File size: ', size)
 	if (int.from_bytes(data[6:7], byteorder='big') == 2): 
 		filenameBytes = data[7:len(data)]
-		filename = byte_filename.decode()
+		filename = filenameBytes.decode()
 		filename = filename.lstrip()
 		if not os.path.exists('recv/'):
 			os.makedirs('recv/')
