@@ -37,25 +37,24 @@ while True:
 	print ('Recieving from' , addr)
 	clientIP_encoded = data[0:4] 
 	clientPORT_encoded = data[4:6] 
-	switch (int.from_bytes(data[6:7], byteorder='big')){ 
-		case 1:
-			sizeByte = data[7:len(data)] 
-			size = int.from_bytes(byte_size, byteorder='big')
-			print ('File size: ', size)
-		case 2:
-			filenameBytes = data[7:len(data)]
-			filename = byte_filename.decode()
-			filename = filename.lstrip()
-			if not os.path.exists('recv/'):
-				os.makedirs('recv/')
-			file = open('recv/' + filename, 'wb')
-		case 3:
-			data = data[7:len(data)]
-			file.write(data)
+	if (int.from_bytes(data[6:7], byteorder='big') == 1): 
+		sizeByte = data[7:len(data)] 
+		size = int.from_bytes(byte_size, byteorder='big')
+		print ('File size: ', size)
+	if (int.from_bytes(data[6:7], byteorder='big') == 2): 
+		filenameBytes = data[7:len(data)]
+		filename = byte_filename.decode()
+		filename = filename.lstrip()
+		if not os.path.exists('recv/'):
+			os.makedirs('recv/')
+		file = open('recv/' + filename, 'wb')
+	if (int.from_bytes(data[6:7], byteorder='big') == 3): 
+		data = data[7:len(data)]
+		file.write(data)
 
-			if data == b"":
-				break
-	}
+		if data == b"":
+			break
+	
 file.close()
 cliSocket.close()
 print('File Successfully transfered. Connection closed.')
