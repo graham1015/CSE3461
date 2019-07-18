@@ -50,6 +50,11 @@ file = open(FILENAME, 'rb')
 flag = 1	
 flagBytes = flag.to_bytes(1, byteorder = 'big') 
 
+ack = 0
+ackNum = -1
+ackBytes = ack.to_bytes(1, byteorder = 'big')
+
+while ack != ackNum
 cliSocket.sendto(hostBytes+portBytes+flagBytes+sizeBytes,('', TROLL))
 print ('Size sent')
 
