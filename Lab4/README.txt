@@ -4,14 +4,18 @@ Name : Gavin Graham
 To run program type:
 
   On System-2/Server (Where the file is to be sent)
-  python3 ftps.py <local-port-on-System-2>
+  python3 ftps.py <local-port-on-System-2> <troll-port-on-System-2>
   
   
   On System-1/client (Where the file originates)
 	  Run the troll 
-	  	troll -C <System 1 IP> -S <System 2 IP> -a 4567 -b <server port on system 2> -r -t -x 0 <troll port on system 2>
+	  	troll -C <IP-address-of-System-1> -S <IP-address-of-System-2> -a <client-port-on-System-1> \-b <server-port-on-System-2> <troll-port-on-System-1> -t -x <packet-drop-\%>
 
-	  Finally open a new window and run this program	
-  		python3 ftpc.py <System 2 IP> <server port on system 2> <file to transfer>
 
-* port 4567 is the hardcoded client port
+  On System-2/Server (Where the file is to be sent)
+     Run
+  		troll -C <IP-address-of-System-2> -S <IP-address-of-System-1> -a <server-port-on-System-2> \-b <client-port-on-System-1> <troll-port-on-System-2> -t -x <packet-drop-\%>
+
+
+  Finally open a new window and run this program	
+  		python3 ftpc.py <IP-address-of-System-2> <remote-port-on-System-2> <troll-port-on-System-1> \<local-file-to-transfer>

@@ -62,7 +62,7 @@ while ack != ackNum
 		cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+sizeBytes,('', TROLL))
 	except (socket.error, msg):
 		sys.exit()
- 	rlist, wlist, xlist = select.select([s], [], [], .05) 
+	rlist, wlist, xlist = select.select([s], [], [], .05) 
 	if len(read) > 0:
 		# socket has recived some data
 		ackRead = rlist[0].recv(1000)
@@ -70,7 +70,7 @@ while ack != ackNum
 		ackNum = int.from_bytes(ackBytes, byteorder = 'big')
 	if [rlist, wlist, xlist] == [ [], [], [] ]: # if packet not ACKed then timeout.
 		print("Timeout")
- 	
+	
 print ('Size sent')
 
 
@@ -86,7 +86,7 @@ while ack != ackNum
 		cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+filenameBytes,('', TROLL))
 	except (socket.error, msg):
 		sys.exit()
- 	rlist, wlist, xlist = select.select([s], [], [], .05) 
+	rlist, wlist, xlist = select.select([s], [], [], .05) 
 	if len(read) > 0:
 		# socket has recived some data
 		ackRead = rlist[0].recv(1000)
@@ -94,7 +94,7 @@ while ack != ackNum
 		ackNum = int.from_bytes(ackBytes, byteorder = 'big')
 	if [rlist, wlist, xlist] == [ [], [], [] ]: # if packet not ACKed then timeout.
 		print("Timeout")
- 	
+	
 print ('filename sent')
 
 
@@ -112,7 +112,7 @@ while data:
 			cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+data,('', TROLL))
 		except (socket.error, msg):
 			sys.exit()
-	 	rlist, wlist, xlist = select.select([s], [], [], .05) 
+		rlist, wlist, xlist = select.select([s], [], [], .05) 
 		if len(read) > 0:
 			# socket has recived some data
 			ackRead = rlist[0].recv(1000)

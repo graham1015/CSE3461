@@ -43,7 +43,7 @@ while 1:
 	cliPORT_encoded = data[4:6]
 	cliFLAG = int.from_bytes(data[6:7], byteorder='big') 
 	cliACK_encoded = data[7:8]
-	if data == dataDup
+	if data == dataDup:
 		servSocket.sendto(cliIP_encoded+cliPORT_encoded+cliACK_encoded, ("", TROLL))
 	else:
 		dataDup = data
