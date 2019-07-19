@@ -45,6 +45,7 @@ while 1:
 	cliACK_encoded = data[7:8]
 	if data == dataDup:
 		servSocket.sendto(cliIP_encoded+cliPORT_encoded+cliACK_encoded, ("", TROLL))
+		print ("Duplicate Packet")
 	else:
 		dataDup = data
 		servSocket.sendto(cliIP_encoded+cliPORT_encoded+cliACK_encoded, ("", TROLL))
