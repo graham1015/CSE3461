@@ -85,6 +85,7 @@ while ack != ackNum:
 	try:
 		cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+filenameBytes,('', TROLL))
 	except (socket.error, msg):
+		print('Failed to send name of file to TROLL: '+ str(msg[0]) + ' , Error message: ' + msg[1])
 		sys.exit()
 	rlist, wlist, xlist = select.select([cliSocket], [], [], .05)
 	if len(rlist) > 0:
