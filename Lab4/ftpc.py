@@ -57,12 +57,12 @@ ackNum = -1
 ackBytes = ack.to_bytes(1, byteorder = 'big')
 
 #while notacked
-while ack != ackNum
+while ack != ackNum:
 	try:
 		cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+sizeBytes,('', TROLL))
 	except (socket.error, msg):
 		sys.exit()
-	rlist, wlist, xlist = select.select([s], [], [], .05) 
+	rlist, wlist, xlist = select.select([s], [], [], .05)
 	if len(read) > 0:
 		# socket has recived some data
 		ackRead = rlist[0].recv(1000)
@@ -81,12 +81,12 @@ ack += 1
 ackBytes = ack.to_bytes(1, byteorder = 'big')
 
 #while not acked
-while ack != ackNum
+while ack != ackNum:
 	try:
 		cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+filenameBytes,('', TROLL))
 	except (socket.error, msg):
 		sys.exit()
-	rlist, wlist, xlist = select.select([s], [], [], .05) 
+	rlist, wlist, xlist = select.select([s], [], [], .05)
 	if len(read) > 0:
 		# socket has recived some data
 		ackRead = rlist[0].recv(1000)
@@ -107,12 +107,12 @@ while data:
 	ack += 1
 	ack = ack % 2
 	ackBytes = ack.to_bytes(1, byteorder = 'big')
-	while ack != ackNum
+	while ack != ackNum:
 		try:
 			cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+data,('', TROLL))
 		except (socket.error, msg):
 			sys.exit()
-		rlist, wlist, xlist = select.select([s], [], [], .05) 
+		rlist, wlist, xlist = select.select([s], [], [], .05)
 		if len(read) > 0:
 			# socket has recived some data
 			ackRead = rlist[0].recv(1000)
