@@ -63,7 +63,7 @@ while ack != ackNum:
 	except (socket.error, msg):
 		sys.exit()
 	rlist, wlist, xlist = select.select([cliSocket], [], [], .05)
-	if len(read) > 0:
+	if len(rlist) > 0:
 		# socket has recived some data
 		ackRead = rlist[0].recv(1000)
 		ackBytes= ackRead[7:8]
@@ -87,7 +87,7 @@ while ack != ackNum:
 	except (socket.error, msg):
 		sys.exit()
 	rlist, wlist, xlist = select.select([cliSocket], [], [], .05)
-	if len(read) > 0:
+	if len(rlist) > 0:
 		# socket has recived some data
 		ackRead = rlist[0].recv(1000)
 		ackBytes= ackRead[7:8]
@@ -113,7 +113,7 @@ while data:
 		except (socket.error, msg):
 			sys.exit()
 		rlist, wlist, xlist = select.select([cliSocket], [], [], .05)
-		if len(read) > 0:
+		if len(rlist) > 0:
 			# socket has recived some data
 			ackRead = rlist[0].recv(1000)
 			ackBytes= ackRead[7:8]
