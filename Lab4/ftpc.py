@@ -104,7 +104,7 @@ flagBytes = flag.to_bytes(1, byteorder = 'big')
 
 #read and send data of file
 data = file.read(1000)
-while data:
+while data != b"":
 	ack = ack + 1
 	ack = ack % 2
 	ackBytes = ack.to_bytes(1, byteorder = 'big')
