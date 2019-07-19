@@ -77,7 +77,7 @@ print ('Size sent')
 flag = 2
 flagBytes = flag.to_bytes(1, byteorder = 'big') 
 
-ack += 1
+ack = ack + 1
 ackBytes = ack.to_bytes(1, byteorder = 'big')
 
 #while not acked
@@ -104,7 +104,7 @@ flagBytes = flag.to_bytes(1, byteorder = 'big')
 #read and send data of file
 data = file.read(1000)
 while data:
-	ack += 1
+	ack = ack + 1
 	ack = ack % 2
 	ackBytes = ack.to_bytes(1, byteorder = 'big')
 	while ack != ackNum:
