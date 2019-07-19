@@ -10,7 +10,7 @@ import select
 
 #Check to see if command line args are valid
 if len(sys.argv) != 5:
-	print('Invalid arguments. Use form: "ftpc.py <remote-IP> <remote-port> <troll-port> <local-file>"')
+	print('Invalid arguments. Use form: "ftpc.py <IP-address-of-System-2> <remote-port-on-System-2> <troll-port-on-System-1> <local-file-to-transfer>"')
 
 HOST = sys.argv[1]
 PORT = int(sys.argv[2])
@@ -36,12 +36,11 @@ if not os.path.exists(FILENAME):
 size = os.path.getsize(FILENAME)
 
 #prep size, filename, IP, and port to be sent
+hostIP = socket.gethostbyname(socket.fqdn(HOST))
 sizeBytes = size.to_bytes(4, byteorder = 'big')
 correctedFILENAME = FILENAME.rjust(20)
 filenameBytes = correctedFILENAME.encode(encoding="ascii")
-hostBytes = socket.inet_aton(HOST) 
-correctedHOST = HOST.rjust(4)
-hostBytes = correctedHOST.encode(encoding="ascii")
+hostBytes = socket.inet_aton(hostIP) 
 portBytes = PORT.to_bytes(2, byteorder='big') 
 
 #open file to read binary
@@ -61,6 +60,7 @@ while ack != ackNum:
 	try:
 		cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+sizeBytes,('', TROLL))
 	except (socket.error, msg):
+		print('Failed to send size of file to TROLL: '+ str(msg[0]) + ' , Error message: ' + msg[1])
 		sys.exit()
 	rlist, wlist, xlist = select.select([cliSocket], [], [], .05)
 	if len(rlist) > 0:
@@ -91,7 +91,7 @@ while ack != ackNum:
 	if len(rlist) > 0:
 		# socket has recived some data
 		ackRead = rlist[0].recv(1000)
-		ackBytes= ackRead[7:8]
+		ackBytes= ackRead[6:]
 		ackNum = int.from_bytes(ackBytes, byteorder = 'big')
 	if [rlist, wlist, xlist] == [ [], [], [] ]: # if packet not ACKed then timeout.
 		print("Timeout")
@@ -117,13 +117,13 @@ while data:
 		if len(rlist) > 0:
 			# socket has recived some data
 			ackRead = rlist[0].recv(1000)
-			ackBytes= ackRead[7:8]
+			ackBytes= ackRead[6:]
 			ackNum = int.from_bytes(ackBytes, byteorder = 'big')
 			time.sleep(.01)		
 		if [rlist, wlist, xlist] == [ [], [], [] ]: # if packet not ACKed then timeout.
 			print("Timeout")
 	data = file.read(1000)
-cliSocket.sendto(hostBytes+portBytes+flagBytes++ackBytes+data,('', TROLL)) 
+cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+data,('', TROLL)) 
 
 file.close()
 cliSocket.close()
