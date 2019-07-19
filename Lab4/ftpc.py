@@ -36,7 +36,7 @@ if not os.path.exists(FILENAME):
 size = os.path.getsize(FILENAME)
 
 #prep size, filename, IP, and port to be sent
-hostIP = socket.gethostbyname(socket.fqdn(HOST))
+hostIP = socket.gethostbyname(socket.getfqdn(HOST))
 sizeBytes = size.to_bytes(4, byteorder = 'big')
 correctedFILENAME = FILENAME.rjust(20)
 filenameBytes = correctedFILENAME.encode(encoding="ascii")
