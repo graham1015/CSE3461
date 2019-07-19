@@ -6,6 +6,7 @@ import socket
 import sys
 import os
 import time
+import select
 
 #Check to see if command line args are valid
 if len(sys.argv) != 5:
@@ -50,19 +51,52 @@ file = open(FILENAME, 'rb')
 flag = 1	
 flagBytes = flag.to_bytes(1, byteorder = 'big') 
 
+#set ack variables
 ack = 0
 ackNum = -1
 ackBytes = ack.to_bytes(1, byteorder = 'big')
 
+#while notacked
 while ack != ackNum
-cliSocket.sendto(hostBytes+portBytes+flagBytes+sizeBytes,('', TROLL))
+	try:
+		cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+sizeBytes,('', TROLL))
+	except (socket.error, msg):
+		sys.exit()
+ 	rlist, wlist, xlist = select.select([s], [], [], .05) 
+	if len(read) > 0:
+		# socket has recived some data
+		ackRead = rlist[0].recv(1000)
+		ackBytes= ackRead[7:8]
+		ackNum = int.from_bytes(ackBytes, byteorder = 'big')
+	if [rlist, wlist, xlist] == [ [], [], [] ]: # if packet not ACKed then timeout.
+		print("Timeout")
+ 	
 print ('Size sent')
+
 
 flag = 2
 flagBytes = flag.to_bytes(1, byteorder = 'big') 
 
-cliSocket.sendto(hostBytes+portBytes+flagBytes+filenameBytes,('', TROLL))
-print ('Name sent')
+ack += 1
+ackBytes = ack.to_bytes(1, byteorder = 'big')
+
+#while not acked
+while ack != ackNum
+	try:
+		cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+filenameBytes,('', TROLL))
+	except (socket.error, msg):
+		sys.exit()
+ 	rlist, wlist, xlist = select.select([s], [], [], .05) 
+	if len(read) > 0:
+		# socket has recived some data
+		ackRead = rlist[0].recv(1000)
+		ackBytes= ackRead[7:8]
+		ackNum = int.from_bytes(ackBytes, byteorder = 'big')
+	if [rlist, wlist, xlist] == [ [], [], [] ]: # if packet not ACKed then timeout.
+		print("Timeout")
+ 	
+print ('filename sent')
+
 
 flag = 3
 flagBytes = flag.to_bytes(1, byteorder = 'big') 
@@ -70,10 +104,25 @@ flagBytes = flag.to_bytes(1, byteorder = 'big')
 #read and send data of file
 data = file.read(1000)
 while data:
-	cliSocket.sendto(hostBytes+portBytes+flagBytes+data,('', TROLL)) 
+	ack += 1
+	ack = ack % 2
+	ackBytes = ack.to_bytes(1, byteorder = 'big')
+	while ack != ackNum
+		try:
+			cliSocket.sendto(hostBytes+portBytes+flagBytes+ackBytes+data,('', TROLL))
+		except (socket.error, msg):
+			sys.exit()
+	 	rlist, wlist, xlist = select.select([s], [], [], .05) 
+		if len(read) > 0:
+			# socket has recived some data
+			ackRead = rlist[0].recv(1000)
+			ackBytes= ackRead[7:8]
+			ackNum = int.from_bytes(ackBytes, byteorder = 'big')
+			time.sleep(.01)		
+		if [rlist, wlist, xlist] == [ [], [], [] ]: # if packet not ACKed then timeout.
+			print("Timeout")
 	data = file.read(1000)
-	time.sleep(.01)
-cliSocket.sendto(hostBytes+portBytes+flagBytes+data,('', TROLL)) 
+cliSocket.sendto(hostBytes+portBytes+flagBytes++ackBytes+data,('', TROLL)) 
 
 file.close()
 cliSocket.close()
