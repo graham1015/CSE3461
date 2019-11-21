@@ -1,0 +1,11 @@
+Author: Gavin Graham
+PA3
+11/21/2019
+
+To run file type
+./kmeans.py -database_file database.txt -k k -max_iters n -eps e -output_file output.txt
+
+
+For the database I used 2d tuples since they should not change
+
+For the centroids and clusters I used list since they need to be able to update.
