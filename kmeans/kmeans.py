@@ -104,7 +104,7 @@ def genKmeans (database, k, n, e, outFile):
         #iterate through clusters
         for cluster in range(0, len(clusters)):
             #create a list of attributes of the points that is the sum of each attribute
-            sum = []
+            sum = [None] * len(database[0])
             #for each point in the cluster
             for dataPoint in clusters[cluster]:
                 if dataPoint is not None:
