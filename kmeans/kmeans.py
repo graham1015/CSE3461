@@ -74,7 +74,7 @@ def genKmeans (database, k, n, e, outFile):
     #repeat until the new and old cluster centroids are e-difference n iterations
     #initialize variables for clusters and old centroids
     i=0
-    oldCentroids = [[None]] * k
+    oldCentroids = [[0]] * k
     clusters = [[None]] * k
     while (compCent(oldCentroids, centroids, e) and (i<n)):
         #update olds centroids
