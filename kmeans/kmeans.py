@@ -54,7 +54,14 @@ def findDist(array1, array2):
          sum = sum + ((array1[x] - array2[x])**2)
      return math.sqrt(sum)
 
-
+#compare centroids
+def compCent(cent1, cent2, e):
+    isGood = true
+    for i in range(0,k):
+        if (findDist(cent1[i], cent2[i]) < e):
+            isGood = false
+    return isGood
+        
 #generate kmeans
 def genKmeans (database, k, n, e, outFile):
     #randomly initiate k centroids and store in 
@@ -67,7 +74,7 @@ def genKmeans (database, k, n, e, outFile):
     i=0
     oldCentroids = [[None]] * k
     clusters = [[None]] * k
-    while ((findDist(oldCentroids, centroids) >e) and (i<n)):
+    while (compCent(oldCentroids, centroids, e) and (i<n)):
         #update olds centroids
         oldCentroids = centroids.copy()
         #increment iteration number
