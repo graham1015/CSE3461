@@ -33,8 +33,8 @@ outFile = str(args.output_file)
 
 #read data from databaseFile
 def read_data(databaseFile):
-    #create tuple of datapoints
-    database = ()
+    #create list of datapoints
+    database = []
     file = open(databaseFile, "r")
     lines = file.readlines()
     #iterate through the lines and create a tuple of attributes for each data point
@@ -43,7 +43,7 @@ def read_data(databaseFile):
         database.append(line)
     #close file and return database of 2d tuples
     file.close()
-    return database
+    return tuple(database)
 
 
 #given 2 lists the euchlidean distance base on the attributes
