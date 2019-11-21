@@ -80,11 +80,11 @@ def genKmeans (database, k, n, e, outFile):
     itr = 0
     oldCentroids = [[0]] * k
     clusters = [[None]] * k
-    while (compCent(oldCentroids, centroids, e) and (i<n)):
+    while (compCent(oldCentroids, centroids, e) and (itr<n)):
         #update olds centroids
         oldCentroids = centroids.copy()
         #increment iteration number
-        itr = itr +1
+        itr = itr + 1
         #assign each data point to each of the k clusters based on Euclidean distance to centroids
         for x in range(0, len(database)):
             #initialize the current centroid and min distance
