@@ -58,7 +58,7 @@ def findDist(array1, array2):
 #generate kmeans
 def genKmeans (database, k, n, e, outFile):
     #randomly initiate k centroids and store in 
-    centroids = []
+    centroids = [None] * k
     for x in range(0, k):
         centroids[x] = database[random.randint(0, len(database))]
 
