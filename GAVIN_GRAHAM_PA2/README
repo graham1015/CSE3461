@@ -1,0 +1,25 @@
+To run the program:
+    python ./Apriori.py -database_file database.txt -minsupp alpha -output_file output.txt
+
+In the functions I used the following data structures
+
+
+generate_F1:
+    database:2d array
+    F1: Dictionary
+
+generate_candidate:
+    Fk:Dictionary
+    lk: Set
+    Lk: Set of sets
+
+prune_candidate:
+    Fk:Dictionary
+    fk: Set
+    lk: Set
+    Lk: Set of sets
+    toPrune: Set
+
+count_support:
+    Lk: Set of sets
+    database: 2d array
