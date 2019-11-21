@@ -69,18 +69,22 @@ def genKmeans (database, k, n, e, outFile):
     #randomly initiate k centroids and store in 
     centroids = [None] * k
     for x in range(0, k):
-        centroids[x] = database[random.randint(0, len(database))]
+        randomint = random.randint(0, len(database))
+        usedint = []
+        while usedint.count(randomint) != 0
+            randomint = random.randint(0, len(database))
+        centroids[x] = database[randomitr]
 
     #repeat until the new and old cluster centroids are e-difference n iterations
     #initialize variables for clusters and old centroids
-    i=0
+    itr = 0
     oldCentroids = [[0]] * k
     clusters = [[None]] * k
     while (compCent(oldCentroids, centroids, e) and (i<n)):
         #update olds centroids
         oldCentroids = centroids.copy()
         #increment iteration number
-        i = i+1
+        itr = itr +1
         #assign each data point to each of the k clusters based on Euclidean distance to centroids
         for x in range(0, len(database)):
             #initialize the current centroid and min distance
@@ -98,28 +102,28 @@ def genKmeans (database, k, n, e, outFile):
 
         #update cluster centroids
         #iterate through clusters
-        for j in range(0, len(clusters)):
+        for cluster in range(0, len(clusters)):
             #create a list of attributes of the points that is the sum of each attribute
             sum = []
             #for each point in the cluster
-            for m in clusters[j]:
+            for dataPoint in clusters[cluster]:
                 #for each attribute in the associated data point
-                for n in range(0, len(database[m])):
+                for attribute in range(0, len(database[dataPoint])):
                     #add the current attribute value to the sum of that attribute
-                    sum[n] = sum[n] + database[m][n]
+                    sum[attribute] = sum[attribute] + database[dataPoint][attribute]
             #for each final sum of attributes, divide by the number of points in the cluster to find the average
-            for r in range (0, len(sum)):
-                sum[r] = sum[r]/len(j)
+            for attr in range (0, len(sum)):
+                sum[attr] = sum[attr]/len(cluster)
             #update centroid for each cluster
             centroids.clear()
-            centroids[j] = sum
+            centroids[cluster] = sum
 
   #output k clusters
     #open file to write
     out = open(outFile, "w+")
     #print the points for each cluster
-    for p in range(0, k):
-        out.print(p +": " +clusters[p])
+    for clust in range(0, k):
+        out.print(clust +": " +clusters[clust])
     return
   
 
