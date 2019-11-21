@@ -73,7 +73,7 @@ def genKmeans (database, k, n, e, outFile):
         usedint = []
         while (usedint.count(randomint) != 0):
             randomint = random.randint(0, len(database))
-        centroids[x] = database[randomitr]
+        centroids[x] = database[randomint]
 
     #repeat until the new and old cluster centroids are e-difference n iterations
     #initialize variables for clusters and old centroids
