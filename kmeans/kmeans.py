@@ -71,7 +71,7 @@ def genKmeans (database, k, n, e, outFile):
     for x in range(0, k):
         randomint = random.randint(0, len(database))
         usedint = []
-        while usedint.count(randomint) != 0
+        while (usedint.count(randomint) != 0):
             randomint = random.randint(0, len(database))
         centroids[x] = database[randomitr]
 
