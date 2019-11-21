@@ -107,10 +107,11 @@ def genKmeans (database, k, n, e, outFile):
             sum = []
             #for each point in the cluster
             for dataPoint in clusters[cluster]:
-                #for each attribute in the associated data point
-                for attribute in range(0, len(database[dataPoint])):
-                    #add the current attribute value to the sum of that attribute
-                    sum[attribute] = sum[attribute] + database[dataPoint][attribute]
+                if dataPoint is not None:
+                    #for each attribute in the associated data point
+                    for attribute in range(0, len(database[dataPoint])):
+                        #add the current attribute value to the sum of that attribute
+                        sum[attribute] = sum[attribute] + database[dataPoint][attribute]
             #for each final sum of attributes, divide by the number of points in the cluster to find the average
             for attr in range (0, len(sum)):
                 sum[attr] = sum[attr]/len(cluster)
