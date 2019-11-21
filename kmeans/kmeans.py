@@ -39,7 +39,7 @@ def read_data(databaseFile):
     lines = file.readlines()
     #iterate through the lines and create a tuple of attributes for each data point
     for x in lines:
-        line = tuple(int(y) for y in x.split())
+        line = tuple(float(y) for y in x.split())
         database.append(line)
     #close file and return database of 2d tuples
     file.close()
